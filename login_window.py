@@ -1,5 +1,6 @@
 import tkinter as tk
 from admin_window import AdminWindow
+from tkinter import ttk 
 
 class LoginWindow(tk.Frame):
     def __init__(self, master):
@@ -8,6 +9,13 @@ class LoginWindow(tk.Frame):
         self.master.title("Login")
         self.master.geometry("400x200")
         self.pack()  # Add this line to pack the LoginWindow
+
+
+        # Configure styles
+        self.style = ttk.Style()
+        self.style.configure("TButton", foreground="black", background="lightblue")
+        self.style.configure("TLabel", foreground="black")
+        self.style.configure("TEntry", foreground="black")
 
         # Username Entry
         self.username_label = tk.Label(self, text="Username:")
@@ -22,9 +30,14 @@ class LoginWindow(tk.Frame):
         self.password_entry.pack()
 
         # Login Button
-        self.login_button = tk.Button(self, text="Login", command=self.on_successful_login)
+        self.login_button = ttk.Button(self, text="Login", command=self.on_successful_login)
         self.login_button.pack()
+        
 
+        # Exit Button
+        self.exit_button = ttk.Button(self, text="Exit", command=self.master.destroy)
+        self.exit_button.pack()
+        
     def on_successful_login(self):
         username = self.username_entry.get()
         # Check username and password here
