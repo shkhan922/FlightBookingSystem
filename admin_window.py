@@ -6,7 +6,7 @@ class AdminWindow(ttk.Frame):
         super().__init__(master)
         self.master = master
         self.master.title("Prog2 Travel Agency")
-        self.master.geometry("800x600")
+        self.master.geometry("1640x600")
         self.pack()
 
         # Style configuration
