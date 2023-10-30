@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, font
+from PIL import Image, ImageTk
 import agency_menu
 
 def login_attempt(username, password, root):
@@ -11,10 +12,19 @@ def login_attempt(username, password, root):
 
 def login_window():
     root = tk.Tk()
+    # Convert PNG to ICO
+    image = Image.open("login_icon.png")
+    icon = ImageTk.PhotoImage(image)
+    
     root.title("Login")
+    root.call('wm', 'iconphoto', root._w, icon)
+    root.geometry('600x400')
     root.config(bg="#E0E0E0")  # Light gray background color
 
-    title_label = tk.Label(root, text="Login", font=('Arial', 16), bg="#E0E0E0")
+    # Custom font for welcome message
+    custom_font = font.Font(family="Helvetica", size=18, weight="bold")
+
+    title_label = tk.Label(root, text="Login", bg="#E0E0E0", font=custom_font, fg="#ADD8E6")
     title_label.pack(pady=20)
 
     username_label = tk.Label(root, text="Username:", bg="#E0E0E0")
@@ -27,9 +37,9 @@ def login_window():
     password_entry = tk.Entry(root, show="*")
     password_entry.pack(pady=5, padx=20, fill=tk.X)
 
-    login_button = tk.Button(root, text="Login", bg="#ADD8E6", borderwidth=2, command=lambda: login_attempt(username_entry.get(), password_entry.get(), root))
+    login_button = tk.Button(root, text="Login", bg="#ADD8E6", fg="white",borderwidth=0, command=lambda: login_attempt(username_entry.get(), password_entry.get(), root))
     login_button.pack(pady=20)
-    exit_button = tk.Button(root, text="Exit", bg="#ADD8E6", borderwidth=2, command=root.destroy)
+    exit_button = tk.Button(root, text="Exit", bg="#ADD8E6", fg="white", borderwidth=0, command=root.destroy)
     exit_button.pack(pady=10)
 
     root.mainloop()
