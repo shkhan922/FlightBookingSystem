@@ -15,9 +15,14 @@ def show_destinations_menu():
     flights.configure(bg='white')
 
     # Load the top image
-    myimg = ImageTk.PhotoImage(Image.open('destination/destination.png'))
-    header_label = tk.Label(flights, image=myimg)
-    header_label.pack(pady=10)
+    top_image = Image.open('destination/destination.png')
+    top_image = top_image.resize((900, 300), Image.ANTIALIAS)
+    top_image = ImageTk.PhotoImage(top_image)
+
+    header_label = tk.Label(flights, image=top_image, bg='white')
+    header_label.image = top_image
+    header_label.pack()
+
 
     # Section Line
     canvas = tk.Canvas(flights, width=1640, height=2, bg='#ADD8E6', highlightthickness=1)
