@@ -4,12 +4,12 @@ from PIL import ImageTk, Image
 from tkinter import ttk
 import csv
 
-def view_flights():
+def view_destinations():
     flights = tk.Toplevel()
-    flights.title("View Flights")
+    flights.title("View Destinations")
 
     # Set the icon photo for the Toplevel window
-    image = Image.open("flights/flights_icon.png")
+    image = Image.open("destination/destination_icon.png")
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
 
@@ -17,8 +17,8 @@ def view_flights():
     flights.configure(bg='white')
 
     # Load the top image
-    top_image = Image.open('flights/flight.png')
-    top_image = top_image.resize((1400, 300), Image.ANTIALIAS)
+    top_image = Image.open('destination/destination.png')
+    top_image = top_image.resize((900, 300), Image.ANTIALIAS)
     top_image = ImageTk.PhotoImage(top_image)
 
     header_label = tk.Label(flights, image=top_image, bg='white')
@@ -68,13 +68,11 @@ def view_flights():
     canvas.pack()
 
     btn_frame = ttk.Frame(flights, style="Background.TFrame")
-    btn_frame.pack(pady=20, fill="x", side="bottom")
+    btn_frame.pack(pady=20)
 
-    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, width=100,foreground="white", border=0, background="#00B2EE",activebackground="#009ACD")    
+    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, foreground="white", border=0, background="#00B2EE")
     close_btn.grid(row=0, column=4, padx=10)
-
-   
 
 # Call the view_flights function to display the window
 if __name__ == "__main__":
-    view_flights()
+    view_destinations()

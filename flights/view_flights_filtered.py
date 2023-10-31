@@ -26,17 +26,17 @@ def view_flights_filtered():
     header_label.pack()
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1640, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(flights, text="Filtered Flights", bg="white", font=custom_font, fg="#ADD8E6")
+    welcome_label = tk.Label(flights, text="Filtered Flights", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1640, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
      # Create a search box to filter flights by country name
@@ -61,7 +61,7 @@ def view_flights_filtered():
     search_entry.bind("<KeyRelease>", search_flights)
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1640, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
     # Create a Treeview widget for displaying the table
@@ -90,15 +90,15 @@ def view_flights_filtered():
 
     # Create a ttk Style to set the background color
     style = ttk.Style()
-    style.configure("Background.TFrame", background="#ADD8E6")
+    style.configure("Background.TFrame", background="#00B2EE")
 
    
 
     # Buttons for Flights Menu
     btn_frame = ttk.Frame(flights, style="Background.TFrame")
-    btn_frame.pack(pady=20)
+    btn_frame.pack(pady=20, fill="x", side="bottom")
 
-    close_btn = tk.Button(btn_frame, text="Close", border=0, background="#ADD8E6",command=flights.destroy)
+    close_btn = tk.Button(btn_frame, text="Close", border=0, background="#00B2EE",activebackground="#009ACD",command=flights.destroy)
     close_btn.grid(row=0, column=4, padx=10)
 
 # Call the view_flights_filtered function to display the window

@@ -26,13 +26,13 @@ def remove_flight():
     header_label.pack()
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
-    welcome_label = tk.Label(flights, text="Remove a Flight", font=custom_font, bg="white", fg="#ADD8E6")
+    welcome_label = tk.Label(flights, text="Remove a Flight", font=custom_font, bg="white", fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Create labels and entry widgets for takeoff and landing country names
@@ -71,14 +71,14 @@ def remove_flight():
         takeoff_country_entry.delete(0, tk.END)
         landing_country_entry.delete(0, tk.END)
 
-    remove_button = tk.Button(flights, text="Remove", command=remove_from_csv, foreground="white", border=0, background="#ADD8E6")
+    remove_button = tk.Button(flights, text="Remove", command=remove_from_csv, foreground="white", border=0, background="#00B2EE")
     remove_button.pack(pady=10)
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
-    close_btn = tk.Button(flights, text="Close", command=flights.destroy, foreground="white", border=0, background="#ADD8E6")
+    close_btn = tk.Button(flights, text="Close", command=flights.destroy, foreground="white", border=0, background="#00B2EE")
     close_btn.pack()
 
 # Call the remove_flight function to display the window

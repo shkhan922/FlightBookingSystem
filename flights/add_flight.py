@@ -18,7 +18,7 @@ def add_flight():
 
     # Load the top image
     top_image = Image.open('flights/flight.png')
-    top_image = top_image.resize((900, 300), Image.ANTIALIAS)
+    top_image = top_image.resize((1400, 300), Image.ANTIALIAS)
     top_image = ImageTk.PhotoImage(top_image)
 
     header_label = tk.Label(flights, image=top_image, bg='white')
@@ -26,13 +26,13 @@ def add_flight():
     header_label.pack()
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
-    welcome_label = tk.Label(flights, text="Add a Flight", font=custom_font, bg="white", fg="#ADD8E6")
+    welcome_label = tk.Label(flights, text="Add a Flight", font=custom_font, bg="white", fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Create labels and entry widgets for flight information
@@ -81,14 +81,14 @@ def add_flight():
         landing_country_entry.delete(0, tk.END)
         cost_entry.delete(0, tk.END)
 
-    add_button = tk.Button(flights, text="Add", command=add_to_csv, foreground="white", border=0, background="#ADD8E6")
+    add_button = tk.Button(flights, text="Add", command=add_to_csv, activebackground="#009ACD",foreground="white", border=0, background="#00B2EE")
     add_button.pack(pady=10)
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#ADD8E6', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
     canvas.pack()
 
-    close_btn = tk.Button(flights, text="Close", command=flights.destroy, foreground="white", border=0, background="#ADD8E6")
+    close_btn = tk.Button(flights, text="Close", command=flights.destroy, foreground="white", border=0, background="#00B2EE", activebackground="#009ACD")
     close_btn.pack()
 
 # Call the add_flight function to display the window
