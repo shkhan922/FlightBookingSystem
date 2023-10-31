@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import PhotoImage, font
+from tkinter import font, ttk
 from PIL import ImageTk, Image
 
 from flights.view_flights import view_flights
@@ -20,9 +20,14 @@ def show_flights_menu():
     flights.configure(bg='white')
 
     # Load the top image
-    myimg = ImageTk.PhotoImage(Image.open("flights/flight.png"))
-    header_label = tk.Label(flights, image=myimg)
-    header_label.pack(pady=10)
+    top_image = Image.open('flights/flight.png')
+    top_image = top_image.resize((900, 300), Image.ANTIALIAS)  # Resize the image to fit the label
+    top_image = ImageTk.PhotoImage(top_image)
+
+    header_label = tk.Label(flights, image=top_image, bg='white')
+    header_label.image = top_image  # Keep a reference to the image to prevent it from being garbage collected
+    header_label.pack()
+
 
     # Section Line
     canvas = tk.Canvas(flights, width=1640, height=2, bg='#ADD8E6', highlightthickness=0)
