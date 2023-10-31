@@ -1,4 +1,6 @@
-import login
+
+
+from login.login import login_window
 
 if __name__ == "__main__":
-    login.login_window()
+    login_window()

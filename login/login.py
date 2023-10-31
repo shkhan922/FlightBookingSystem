@@ -1,19 +1,20 @@
 import tkinter as tk
 from tkinter import messagebox, font
 from PIL import Image, ImageTk
-import agency_menu
+
+from agency.agency_menu import show_agency_menu
 
 def login_attempt(username, password, root):
     if username == "admin" and password == "password":
         root.destroy()
-        agency_menu.show_agency_menu()
+        show_agency_menu()
     else:
         messagebox.showerror("Error", "Login Failed!")
 
 def login_window():
     root = tk.Tk()
     # Convert PNG to ICO
-    image = Image.open("login_icon.png")
+    image = Image.open("login/login_icon.png")
     icon = ImageTk.PhotoImage(image)
     
     root.title("Login")
