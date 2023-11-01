@@ -46,7 +46,7 @@ def show_destinations_menu(admin_name):
     btn_frame = tk.Frame(destinations, bg='#00B2EE')
     btn_frame.pack(pady=20, fill="x", side="bottom")
 
-    view_all_btn = tk.Button(btn_frame, text="View All Destinations", width=35, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_destinations)
+    view_all_btn = tk.Button(btn_frame, text="View All Destinations", width=35, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_destinations(admin_name))
     view_all_btn.grid(row=0, column=0, padx=10)
 
     view_by_country_btn = tk.Button(btn_frame, text="View Destinations by Country", width=45, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_destinations_filtered)
