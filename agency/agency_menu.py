@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage, font
 from PIL import Image, ImageTk
 from flights.flights_menu import show_flights_menu
-from destination.destinations_menu import show_destinations_menu
+from destinations.destinations_menu import show_destinations_menu
 from trip.trip_menu import show_trip_menu
 
 def show_agency_menu(admin_name):
@@ -20,7 +20,7 @@ def show_agency_menu(admin_name):
     header_label.pack(pady=20)
 
     # Section Line
-    canvas = tk.Canvas(agency, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
+    canvas = tk.Canvas(agency, width=1640, height=2, highlightthickness=0)
     canvas.pack()
 
     # Custom font for the welcome message

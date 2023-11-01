@@ -16,7 +16,7 @@ def show_flights_menu():
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
     
-    flights.geometry('1640x700')
+    flights.geometry('1640x800')
     flights.configure(bg='white')
 
     # Load the top image

@@ -9,7 +9,7 @@ def view_destinations():
     flights.title("View Destinations")
 
     # Set the icon photo for the Toplevel window
-    image = Image.open("destination/destination_icon.png")
+    image = Image.open("destinations/destinations_icon.png")
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
 
@@ -17,8 +17,8 @@ def view_destinations():
     flights.configure(bg='white')
 
     # Load the top image
-    top_image = Image.open('destination/destination.png')
-    top_image = top_image.resize((900, 300), Image.ANTIALIAS)
+    top_image = Image.open('destinations/destination.png')
+    top_image = top_image.resize((1400, 300), Image.ANTIALIAS)
     top_image = ImageTk.PhotoImage(top_image)
 
     header_label = tk.Label(flights, image=top_image, bg='white')
@@ -32,25 +32,27 @@ def view_destinations():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
-    welcome_label = tk.Label(flights, text="Flights", font=custom_font, bg="white", fg="#00B2EE")
+    welcome_label = tk.Label(flights, text="Destinations", font=custom_font, bg="white", fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Create a Treeview widget for displaying the table
-    tree = ttk.Treeview(flights, columns=("Airline", "Flight Number", "Takeoff Country", "Landing Country", "Cost"))
+    tree = ttk.Treeview(flights, columns=("Name", "Country"))
 
     # Define column names
-    tree.heading("#1", text="Airline")
-    tree.heading("#2", text="Flight Number")
-    tree.heading("#3", text="Takeoff Country")
-    tree.heading("#4", text="Landing Country")
-    tree.heading("#5", text="Cost")
+    tree.heading("#1", text="Name")
+    tree.heading("#2", text="Country")
+    
+    # Set column text color to light blue
+    style = ttk.Style()
+    style.configure("Treeview.Heading", foreground="#00B2EE")
+
 
     # Add a vertical scrollbar
     vsb = ttk.Scrollbar(flights, orient="vertical", command=tree.yview)
     tree.configure(yscrollcommand=vsb.set)
 
     # Read data from a CSV file and insert it into the table
-    with open("flights/flights.csv", "r") as file:
+    with open("destinations/destinations.csv", "r") as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
             tree.insert("", "end", values=row)
@@ -68,9 +70,9 @@ def view_destinations():
     canvas.pack()
 
     btn_frame = ttk.Frame(flights, style="Background.TFrame")
-    btn_frame.pack(pady=20)
+    btn_frame.pack(pady=20, fill="x",side="bottom")
 
-    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, foreground="white", border=0, background="#00B2EE")
+    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, width=100,foreground="white", border=0, background="#00B2EE")
     close_btn.grid(row=0, column=4, padx=10)
 
 # Call the view_flights function to display the window
