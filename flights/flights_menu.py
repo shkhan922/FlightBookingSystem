@@ -51,7 +51,7 @@ def show_flights_menu(admin_name):
     view_all_btn = tk.Button(btn_frame, text="View All Flights", width=30, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_flights)
     view_all_btn.grid(row=0, column=0, padx=10)
 
-    view_by_country_btn = tk.Button(btn_frame, text="View Flights by Country", width=45, height=2, fg="white", bg="#00B2EE",activebackground="#009ACD", borderwidth=0, command=view_flights_filtered)
+    view_by_country_btn = tk.Button(btn_frame, text="View Flights by Country", width=35, height=2, fg="white", bg="#00B2EE",activebackground="#009ACD", borderwidth=0, command=view_flights_filtered)
     view_by_country_btn.grid(row=0, column=1, padx=10)
 
     add_flight_btn = tk.Button(btn_frame, text="Add Flight", width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=add_flight)

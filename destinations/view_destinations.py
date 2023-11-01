@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 from tkinter import ttk
 import csv
 
-def view_destinations(destination):
+def view_destinations():
     flights = tk.Toplevel()
     flights.title("View Destinations")
 

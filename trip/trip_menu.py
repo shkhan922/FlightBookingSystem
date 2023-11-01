@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 import csv
 from trip.add_trip_destination import add_trip_destination
 from trip.remove_destination_trip import remove_destination_trip
-from destinations.view_destinations import view_destinations
+# from destinations.view_destinations import view_destinations
 from trip.add_connecting_flight import add_connecting_flights  # Import the add_connecting_flights function
 from functools import partial
 
@@ -25,7 +25,7 @@ def view_trip():
     icon = ImageTk.PhotoImage(image)
     trip_window.iconphoto(False, icon)
 
-    trip_window.geometry('1640x800')
+    trip_window.geometry('1640x900')
     trip_window.configure(bg='white')
 
     top_image = Image.open('trip/trip.png')
@@ -57,7 +57,7 @@ def view_trip():
         selected_indices = trip_list.curselection()
         for index in selected_indices:
             destination = trip_list.get(index)
-            view_destinations(destination)
+            # view_destinations(destination)
             # Handle the destination here (e.g., open view_destination)
 
     button_frame = tk.Frame(trip_window, bg="#00B2EE")

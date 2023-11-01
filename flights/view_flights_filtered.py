@@ -52,8 +52,6 @@ def view_flights_filtered():
             tree.insert("", "end", values=row)
             data.append(row)
     
-    
-
     # Create a search box to filter flights by country name
     search_frame = tk.Frame(flights, bg="white")
     search_frame.pack(pady=10, padx=30, fill="x")
