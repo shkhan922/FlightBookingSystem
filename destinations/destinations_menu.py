@@ -35,7 +35,7 @@ def show_destinations_menu():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(destinations, text="Hi Davey, welcome to the Destinations section", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label = tk.Label(destinations, text="Hi {admin_name}, welcome to the Destinations section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line

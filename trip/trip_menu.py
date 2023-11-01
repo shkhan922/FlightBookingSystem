@@ -63,7 +63,7 @@ def show_trip_menu():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(flights, text="Hi Davey, welcome to the Trip section", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label = tk.Label(flights, text="Hi {admin_name}, welcome to the Trip section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line

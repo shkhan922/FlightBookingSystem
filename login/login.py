@@ -5,6 +5,7 @@ import csv
 import os  # Import the os module to exit the program
 
 from agency.agency_menu import show_agency_menu
+from error_window import show_error_window
 
 def login_attempt(username, password, root, login_button):
     # Read login credentials from a CSV file
@@ -16,7 +17,8 @@ def login_attempt(username, password, root, login_button):
                 root.destroy()
                 show_agency_menu(row[2])  # Pass admin name as a parameter
                 return
-    messagebox.showerror("Error", "Login Failed!")
+    # messagebox.showerror("Error", "Login Failed!")
+    show_error_window("Login Failed!")
 
 def enable_login_button(event, username_entry, password_entry, login_button):
     if username_entry.get() and password_entry.get():

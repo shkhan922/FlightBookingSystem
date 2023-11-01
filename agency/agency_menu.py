@@ -52,4 +52,4 @@ def show_agency_menu(admin_name):
     agency.mainloop()
 
 if __name__ == "__main__":
-    show_agency_menu("admin")
+    show_agency_menu()
