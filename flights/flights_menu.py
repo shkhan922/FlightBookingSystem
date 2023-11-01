@@ -16,7 +16,7 @@ def show_flights_menu():
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
     
-    flights.geometry('1640x600')
+    flights.geometry('1640x700')
     flights.configure(bg='white')
 
     # Load the top image
@@ -40,7 +40,7 @@ def show_flights_menu():
     welcome_label.pack(pady=20)
 
     # Section Line
-    canvas = tk.Canvas(flights, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
+    canvas = tk.Canvas(flights, width=1640, height=2, highlightthickness=0)
     canvas.pack()
 
     # Buttons for Flights Menu

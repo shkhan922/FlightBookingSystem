@@ -1,10 +1,16 @@
 import tkinter as tk
 from tkinter import PhotoImage, font
 from PIL import ImageTk, Image
-from tkinter import ttk
 import csv
 
 def add_flight():
+    def validate_entries(*args):
+        all_filled = all(entry.get() for entry in entries)
+        if all_filled:
+            add_button.config(state="normal")
+        else:
+            add_button.config(state="disabled")
+
     flights = tk.Toplevel()
     flights.title("Add Flight")
 
@@ -13,7 +19,7 @@ def add_flight():
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
 
-    flights.geometry('1400x800')
+    flights.geometry('800x600')
     flights.configure(bg='white')
 
     # Load the top image
@@ -23,73 +29,59 @@ def add_flight():
 
     header_label = tk.Label(flights, image=top_image, bg='white')
     header_label.image = top_image
-    header_label.pack()
+    header_label.grid(row=0, column=0, columnspan=2)
 
-    # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
-    canvas.pack()
+    
 
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
     welcome_label = tk.Label(flights, text="Add a Flight", font=custom_font, bg="white", fg="#00B2EE")
-    welcome_label.pack(pady=20)
+    welcome_label.grid(row=1, column=0, columnspan=2, pady=20)
+
+   
+
 
     # Create labels and entry widgets for flight information
-    airline_label = ttk.Label(flights, text="Airline")
-    airline_label.pack()
-    airline_entry = ttk.Entry(flights)
-    airline_entry.pack()
+    labels = ["Airline", "Flight Number", "Takeoff Country", "Landing Country", "Cost"]
+    entries = []
 
-    flight_number_label = ttk.Label(flights, text="Flight Number")
-    flight_number_label.pack()
-    flight_number_entry = ttk.Entry(flights)
-    flight_number_entry.pack()
+    for i, label_text in enumerate(labels):
+        label = tk.Label(flights, text=label_text, fg="#00B2EE", bg="white")
+        label.grid(row=i + 2, column=0, padx=10, pady=5, sticky='w')
 
-    takeoff_country_label = ttk.Label(flights, text="Takeoff Country")
-    takeoff_country_label.pack()
-    takeoff_country_entry = ttk.Entry(flights)
-    takeoff_country_entry.pack()
+        entry = tk.Entry(flights, bg='white')
+        entry.grid(row=i + 2, column=1, padx=10, pady=5)
+        entry.insert(0, "")  # Initialize entries with empty strings
+        entries.append(entry)
+        entry.bind("<KeyRelease>", validate_entries)  # Bind validation function to entry
 
-    landing_country_label = ttk.Label(flights, text="Landing Country")
-    landing_country_label.pack()
-    landing_country_entry = ttk.Entry(flights)
-    landing_country_entry.pack()
-
-    cost_label = ttk.Label(flights, text="Cost")
-    cost_label.pack()
-    cost_entry = ttk.Entry(flights)
-    cost_entry.pack()
+    # Frame for buttons
+    button_frame = tk.Frame(flights, bg="#00B2EE")
+    button_frame.grid(row=7, column=0, columnspan=2, sticky='s')
 
     def add_to_csv():
         # Get the data from entry widgets
-        airline = airline_entry.get()
-        flight_number = flight_number_entry.get()
-        takeoff_country = takeoff_country_entry.get()
-        landing_country = landing_country_entry.get()
-        cost = cost_entry.get()
+        data = [entry.get() for entry in entries]
 
         # Append the data to the CSV file
         with open("flights/flights.csv", "a", newline="") as file:
             csv_writer = csv.writer(file)
-            csv_writer.writerow([airline, flight_number, takeoff_country, landing_country, cost])
+            csv_writer.writerow(data)
 
         # Clear the entry widgets after adding
-        airline_entry.delete(0, tk.END)
-        flight_number_entry.delete(0, tk.END)
-        takeoff_country_entry.delete(0, tk.END)
-        landing_country_entry.delete(0, tk.END)
-        cost_entry.delete(0, tk.END)
+        for entry in entries:
+            entry.delete(0, tk.END)
+            add_button.config(state="disabled")  # Disable "Add" button
 
-    add_button = tk.Button(flights, text="Add", command=add_to_csv, activebackground="#009ACD",foreground="white", border=0, background="#00B2EE")
-    add_button.pack(pady=10)
+    add_button = tk.Button(button_frame, text="Add", command=add_to_csv, activebackground="#009ACD", width=50, foreground="white", border=0, background="#00B2EE", state="disabled")
+    add_button.grid(row=0, column=0)
 
-    # Section Line
-    canvas = tk.Canvas(flights, width=1400, height=2, bg='#00B2EE', highlightthickness=0)
-    canvas.pack()
+    close_btn = tk.Button(button_frame, text="Close", command=flights.destroy, foreground="white", border=0, width=50, background="#00B2EE", activebackground="#009ACD")
+    close_btn.grid(row=0, column=1)
 
-    close_btn = tk.Button(flights, text="Close", command=flights.destroy, foreground="white", border=0, background="#00B2EE", activebackground="#009ACD")
-    close_btn.pack()
+    flights.columnconfigure(1, weight=1)
+    flights.rowconfigure(7, weight=1)
 
 # Call the add_flight function to display the window
 if __name__ == "__main__":
