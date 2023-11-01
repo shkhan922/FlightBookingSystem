@@ -18,7 +18,7 @@ def login_attempt(username, password, root, login_button):
                 show_agency_menu(row[2])  # Pass admin name as a parameter
                 return
     # messagebox.showerror("Error", "Login Failed!")
-    show_error_window("Login Failed!")
+    show_error_window("Invalid creditials exception!!", "Enter Correct username/password")
 
 def enable_login_button(event, username_entry, password_entry, login_button):
     if username_entry.get() and password_entry.get():

@@ -7,9 +7,10 @@ from flights.view_flights_filtered import view_flights_filtered
 from flights.add_flight import add_flight
 from flights.remove_flight import remove_flight
 
-def show_flights_menu():
+def show_flights_menu(admin_name):
     flights = tk.Toplevel()
     flights.title("Explore Flights")
+
     
     # Set the icon photo for the Toplevel window
     image = Image.open("flights/flights_icon.png")
@@ -36,7 +37,7 @@ def show_flights_menu():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(flights, text="Hi {admin_name}, welcome to the Flights section", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label = tk.Label(flights, text=f"Hi {admin_name}, welcome to the Flights section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line

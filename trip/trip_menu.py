@@ -4,9 +4,6 @@ from PIL import ImageTk, Image
 from destinations.add_destination import add_destination
 from destinations.remove_destination import remove_destination
 
-def add_destination():
-    # You can redirect to the Add Destination window or function from here
-    pass
 
 def view_trip():
     trip_window = tk.Toplevel()
@@ -35,7 +32,7 @@ def view_individual_destination():
     # You can implement the code to view individual destination details here
     pass
 
-def show_trip_menu():
+def show_trip_menu(admin_name):
     flights = tk.Toplevel()
     flights.title("Book A Trip")
     
@@ -63,7 +60,7 @@ def show_trip_menu():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(flights, text="Hi {admin_name}, welcome to the Trip section", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label = tk.Label(flights, text=f"Hi {admin_name}, welcome to the Trip section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line
@@ -80,11 +77,14 @@ def show_trip_menu():
     remove_destination_btn = tk.Button(btn_frame, text="Remove Destination", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=remove_destination)
     remove_destination_btn.grid(row=0, column=1, padx=10)
 
+    add_connecting_btn = tk.Button(btn_frame, text="Add Connecting Flights", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
+    add_connecting_btn.grid(row=0, column=2, padx=10)
+
     view_trip_btn = tk.Button(btn_frame, text="View Trip", width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=view_trip)
-    view_trip_btn.grid(row=0, column=2, padx=10)
+    view_trip_btn.grid(row=0, column=3, padx=10)
 
     close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
-    close_btn.grid(row=0, column=3, padx=10)
+    close_btn.grid(row=0, column=4, padx=10)
 
 if __name__ == "__main__":
     show_trip_menu()

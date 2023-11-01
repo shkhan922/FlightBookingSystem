@@ -7,7 +7,7 @@ from destinations.view_destinations_filtered import view_destinations_filtered
 from destinations.add_destination import add_destination
 from destinations.remove_destination import remove_destination
 
-def show_destinations_menu():
+def show_destinations_menu(admin_name):
     destinations = tk.Toplevel()
     destinations.title("Explore Destinations")
     
@@ -35,7 +35,7 @@ def show_destinations_menu():
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
     
-    welcome_label = tk.Label(destinations, text="Hi {admin_name}, welcome to the Destinations section", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label = tk.Label(destinations, text=f"Hi {admin_name}, welcome to the Destinations section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
     # Section Line

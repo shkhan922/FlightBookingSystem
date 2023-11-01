@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 
 
 
-def show_error_window(error_message):
+def show_error_window(error_type,error_message):
     flights = tk.Toplevel()
     flights.title("Error")
     
@@ -13,12 +13,12 @@ def show_error_window(error_message):
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
     
-    flights.geometry('800x600')
+    flights.geometry('600x450')
     flights.configure(bg='white')
 
     # Load the top image
     top_image = Image.open('error.png')
-    top_image = top_image.resize((800, 300), Image.ANTIALIAS)  # Resize the image to fit the label
+    top_image = top_image.resize((600, 150), Image.ANTIALIAS)  # Resize the image to fit the label
     top_image = ImageTk.PhotoImage(top_image)
 
     header_label = tk.Label(flights, image=top_image, bg='white')
@@ -40,8 +40,11 @@ def show_error_window(error_message):
     canvas = tk.Canvas(flights, width=1640, height=2, highlightthickness=0)
     canvas.pack()
 
-    error_label = tk.Label(flights, text=error_message, bg="#E0E0E0", fg="red")
+    error_label = tk.Label(flights, text=error_type, bg="white", fg="red")
     error_label.pack(pady=20)
+
+    error_message = tk.Label(flights, text=error_message,bg="white", fg="#00B2EE")
+    error_message.pack(pady=20)
 
     # Buttons for Flights Menu
     btn_frame = tk.Frame(flights, bg='#00B2EE')
