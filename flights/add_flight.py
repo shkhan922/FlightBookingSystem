@@ -1,15 +1,28 @@
 import tkinter as tk
-from tkinter import PhotoImage, font
+from tkinter import PhotoImage, font, messagebox
 from PIL import ImageTk, Image
 import csv
 
+from error_window import show_error_window
+
 def add_flight():
     def validate_entries(*args):
+        airline, flight_number, takeoff_country, landing_country, cost = [entry.get() for entry in entries]
         all_filled = all(entry.get() for entry in entries)
+        valid_flight_number = flight_number.isdigit()
+        valid_cost = cost.replace(".", "", 1).isdigit() if "." in cost else cost.isdigit()
+
         if all_filled:
             add_button.config(state="normal")
         else:
             add_button.config(state="disabled")
+
+    def show_error(message):
+        error_window = tk.Toplevel()
+        error_window.title("Error")
+        error_label = tk.Label(error_window, text=message, bg="white", font=("Helvetica", 14), fg="red")
+        error_label.pack(padx=20, pady=10)
+        error_window.mainloop()
 
     flights = tk.Toplevel()
     flights.title("Add Flight")
@@ -31,16 +44,11 @@ def add_flight():
     header_label.image = top_image
     header_label.grid(row=0, column=0, columnspan=2)
 
-    
-
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
     welcome_label = tk.Label(flights, text="Add a Flight", font=custom_font, bg="white", fg="#00B2EE")
     welcome_label.grid(row=1, column=0, columnspan=2, pady=20)
-
-   
-
 
     # Create labels and entry widgets for flight information
     labels = ["Airline", "Flight Number", "Takeoff Country", "Landing Country", "Cost"]
@@ -61,8 +69,14 @@ def add_flight():
     button_frame.grid(row=7, column=0, columnspan=2, sticky='s')
 
     def add_to_csv():
+        airline, flight_number, takeoff_country, landing_country, cost = [entry.get() for entry in entries]
+        if not flight_number.isdigit() or (cost.replace(".", "", 1) if "." in cost else cost).isdigit():
+            # show_error("Flig")
+            show_error_window("Number format exception !!", "Enter a Number")
+            return
+
         # Get the data from entry widgets
-        data = [entry.get() for entry in entries]
+        data = [airline, flight_number, takeoff_country, landing_country, cost]
 
         # Append the data to the CSV file
         with open("flights/flights.csv", "a", newline="") as file:
@@ -74,10 +88,10 @@ def add_flight():
             entry.delete(0, tk.END)
             add_button.config(state="disabled")  # Disable "Add" button
 
-    add_button = tk.Button(button_frame, text="Add", command=add_to_csv, activebackground="#009ACD", width=50, foreground="white", border=0, background="#00B2EE", state="disabled")
+    add_button = tk.Button(button_frame, text="Add", command=add_to_csv, activebackground="#009ACD", width=50, foreground="white", borderwidth=0, background="#00B2EE", state="disabled")
     add_button.grid(row=0, column=0)
 
-    close_btn = tk.Button(button_frame, text="Close", command=flights.destroy, foreground="white", border=0, width=50, background="#00B2EE", activebackground="#009ACD")
+    close_btn = tk.Button(button_frame, text="Close", command=flights.destroy, foreground="white", borderwidth=0, width=50, background="#00B2EE", activebackground="#009ACD")
     close_btn.grid(row=0, column=1)
 
     flights.columnconfigure(1, weight=1)

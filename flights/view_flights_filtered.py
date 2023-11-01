@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, font
 from PIL import ImageTk, Image
 import csv
 
@@ -24,6 +24,12 @@ def view_flights_filtered():
     header_label.image = top_image
     header_label.pack()
 
+    # Custom font for welcome message
+    custom_font = font.Font(family="Helvetica", size=18, weight="bold")
+
+    welcome_label = tk.Label(flights, text="Filtered Flight", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label.pack(pady=20)
+
     # Create a Treeview widget for displaying the table
     tree = ttk.Treeview(flights, columns=("Airline", "Flight Number", "Takeoff Country", "Landing Country", "Cost"))
 
@@ -45,13 +51,15 @@ def view_flights_filtered():
         for row in csv_reader:
             tree.insert("", "end", values=row)
             data.append(row)
+    
+    
 
     # Create a search box to filter flights by country name
-    search_frame = ttk.Frame(flights)
-    search_frame.pack(pady=10)
+    search_frame = tk.Frame(flights, bg="white")
+    search_frame.pack(pady=10, padx=30, fill="x")
 
-    search_entry = ttk.Entry(search_frame)
-    search_entry.grid(row=0, column=0, padx=5, sticky="ew")
+    search_entry = tk.Entry(search_frame)
+    search_entry.pack(fill="x")
 
     def search_flights(event):
         search_text = search_entry.get().lower()

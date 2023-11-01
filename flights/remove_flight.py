@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import PhotoImage, font
+from tkinter import PhotoImage, font, messagebox
 from PIL import ImageTk, Image
 import csv
+from error_window import show_error_window
 
 def remove_flight():
     def validate_entries(*args):
@@ -32,15 +33,11 @@ def remove_flight():
     header_label.image = top_image
     header_label.grid(row=0, column=0, columnspan=2)
 
-   
-
     # Custom font for welcome message
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
 
     welcome_label = tk.Label(flights, text="Remove a Flight", font=custom_font, bg="white", fg="#00B2EE")
     welcome_label.grid(row=1, column=0, columnspan=2, pady=20)
-
-    
 
     # Create labels and entry widgets for flight information
     takeoff_country_label = tk.Label(flights, text="Takeoff Country", fg="#00B2EE", bg="white")
@@ -75,15 +72,20 @@ def remove_flight():
         # Search for flights and remove the matching entries
         new_data = [entry for entry in data if entry[2] != takeoff or entry[3] != landing]
 
-        # Write the updated data back to the CSV file
-        with open("flights/flights.csv", "w", newline="") as file:
-            csv_writer = csv.writer(file)
-            csv_writer.writerows(new_data)
+        if data == new_data:
+            # Entry not found, show an error message
+            # messagebox.showerror("Entry Not Found", "Flight not found. Please check the takeoff and landing countries.")
+            show_error_window("Item not found exception","Please enter the correct take off or landing country")
+        else:
+            # Write the updated data back to the CSV file
+            with open("flights/flights.csv", "w", newline="") as file:
+                csv_writer = csv.writer(file)
+                csv_writer.writerows(new_data)
 
-        # Clear the entry widgets after removing
-        takeoff_country_entry.delete(0, tk.END)
-        landing_country_entry.delete(0, tk.END)
-        remove_button.config(state="disabled")  # Disable "Remove" button
+            # Clear the entry widgets after removing
+            takeoff_country_entry.delete(0, tk.END)
+            landing_country_entry.delete(0, tk.END)
+            remove_button.config(state="disabled")  # Disable "Remove" button
 
     remove_button = tk.Button(button_frame, text="Remove", command=remove_from_csv, activebackground="#009ACD", width=50, foreground="white", border=0, background="#00B2EE", state="disabled")
     remove_button.grid(row=0, column=0, padx=10)

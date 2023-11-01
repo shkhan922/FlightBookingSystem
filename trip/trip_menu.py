@@ -9,6 +9,37 @@ def view_trip():
     trip_window = tk.Toplevel()
     trip_window.title("Display Trip")
 
+    # Set the icon photo for the Toplevel window
+    image = Image.open("trip/trip_icon.png")
+    icon = ImageTk.PhotoImage(image)
+    trip_window.iconphoto(False, icon)
+    
+    trip_window.geometry('1640x800')
+    trip_window.configure(bg='white')
+
+    # Load the top image
+    top_image = Image.open('trip/trip.png')
+    top_image = top_image.resize((1640, 300), Image.ANTIALIAS)  # Resize the image to fit the label
+    top_image = ImageTk.PhotoImage(top_image)
+
+    header_label = tk.Label(trip_window, image=top_image, bg='white')
+    header_label.image = top_image  # Keep a reference to the image to prevent it from being garbage collected
+    header_label.pack()
+
+    # Section Line
+    canvas = tk.Canvas(trip_window, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
+    canvas.pack()
+
+    # Custom font for welcome message
+    custom_font = font.Font(family="Helvetica", size=18, weight="bold")
+    
+    welcome_label = tk.Label(trip_window, text=f"Your Trip", bg="white", font=custom_font, fg="#00B2EE")
+    welcome_label.pack(pady=20)
+
+    # Section Line
+    canvas = tk.Canvas(trip_window, width=1640, height=2, bg='#00B2EE', highlightthickness=0)
+    canvas.pack()
+
     # Create a list to display destination information
     trip_list = tk.Listbox(trip_window, width=60, height=15, bg="white", selectbackground="#00B2EE")
 
@@ -21,12 +52,15 @@ def view_trip():
 
     trip_list.pack(pady=20)
 
-    # Buttons to view individual destination and close the trip window
-    view_individual_btn = tk.Button(trip_window, text="View Individual", command=view_individual_destination, width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
-    view_individual_btn.pack(pady=10)
+    # Frame for buttons
+    button_frame = tk.Frame(trip_window, bg="#00B2EE")
+    button_frame.pack(pady=10, fill="x")
 
-    close_trip_btn = tk.Button(trip_window, text="Close", command=trip_window.destroy, width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
-    close_trip_btn.pack()
+    view_individual_btn = tk.Button(button_frame, text="View Individual", command=view_individual_destination, width=50, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
+    view_individual_btn.pack(side="left", padx=10)
+
+    close_trip_btn = tk.Button(button_frame, text="Close", command=trip_window.destroy, width=50, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
+    close_trip_btn.pack(side="right", padx=10)
 
 def view_individual_destination():
     # You can implement the code to view individual destination details here

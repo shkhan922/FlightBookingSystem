@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, font
 from PIL import ImageTk, Image
 import csv
 
@@ -24,6 +24,13 @@ def view_destinations_filtered():
     header_label.image = top_image
     header_label.pack()
 
+    # Custom font for welcome message
+    custom_font = font.Font(family="Helvetica", size=18, weight="bold")
+
+    welcome_label = tk.Label(destinations, text="Destinations", font=custom_font, bg="white", fg="#00B2EE")
+    welcome_label.pack(pady=20)
+
+
     # Create a Treeview widget for displaying the table
     tree = ttk.Treeview(destinations, columns=("Name", "Country",))
 
@@ -44,12 +51,12 @@ def view_destinations_filtered():
             tree.insert("", "end", values=row)
             data.append(row)
 
-    # Create a search box to filter destinations by country or city name
-    search_frame = ttk.Frame(destinations)
-    search_frame.pack(pady=10)
+   # Create a search box to filter flights by country name
+    search_frame = tk.Frame(destinations, bg="white")
+    search_frame.pack(pady=10, padx=30, fill="x")
 
-    search_entry = ttk.Entry(search_frame)
-    search_entry.grid(row=0, column=0, padx=5, sticky="ew")
+    search_entry = tk.Entry(search_frame)
+    search_entry.pack(fill="x")
 
     def search_destinations(event):
         search_text = search_entry.get().lower()

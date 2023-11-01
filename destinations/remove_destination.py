@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import font
+from tkinter import messagebox, font
 from PIL import ImageTk, Image
 import csv
+from error_window import show_error_window
 
 def remove_destination():
     def validate_entries(*args):
@@ -39,7 +40,7 @@ def remove_destination():
     welcome_label.grid(row=1, column=0, columnspan=2, pady=20)
 
     # Create labels and entry widgets for destination information
-    country_label = tk.Label(destinations, text="Country", fg="#00B2EE", bg="white")
+    country_label = tk.Label(destinations, text="Name", fg="#00B2EE", bg="white")
     country_label.grid(row=2, column=0, padx=10, pady=5, sticky='w')
 
     country_entry = tk.Entry(destinations, bg='white')
@@ -47,7 +48,7 @@ def remove_destination():
     country_entry.insert(0, "")  # Initialize entry with an empty string
     country_entry.bind("<KeyRelease>", validate_entries)  # Bind validation function to entry
 
-    city_label = tk.Label(destinations, text="City", fg="#00B2EE", bg="white")
+    city_label = tk.Label(destinations, text="Country", fg="#00B2EE", bg="white")
     city_label.grid(row=3, column=0, padx=10, pady=5, sticky='w')
 
     city_entry = tk.Entry(destinations, bg='white')
@@ -68,18 +69,24 @@ def remove_destination():
             csv_reader = csv.reader(file)
             data = list(csv_reader)
 
-        # Search for destinations and remove the matching entries
-        new_data = [entry for entry in data if entry[0] != country or entry[1] != city]
+        # Check if the specified destination is in the data
+        if [country, city] not in data:
+            # Show an error message if the destination is not found
+            # messagebox.showerror("Error", f"Destination '{country}, {city}' not found.")
+            show_error_window("Item not found exception", f"'{country}, {city}' not found." )
+        else:
+            # Remove the matching entries
+            new_data = [entry for entry in data if entry[0] != country or entry[1] != city]
 
-        # Write the updated data back to the CSV file
-        with open("destinations/destinations.csv", "w", newline="") as file:
-            csv_writer = csv.writer(file)
-            csv_writer.writerows(new_data)
+            # Write the updated data back to the CSV file
+            with open("destinations/destinations.csv", "w", newline="") as file:
+                csv_writer = csv.writer(file)
+                csv_writer.writerows(new_data)
 
-        # Clear the entry widgets after removing
-        country_entry.delete(0, tk.END)
-        city_entry.delete(0, tk.END)
-        remove_button.config(state="disabled")  # Disable "Remove" button
+            # Clear the entry widgets after removing
+            country_entry.delete(0, tk.END)
+            city_entry.delete(0, tk.END)
+            remove_button.config(state="disabled")  # Disable "Remove" button
 
     remove_button = tk.Button(button_frame, text="Remove", command=remove_from_csv, activebackground="#009ACD", width=50, foreground="white", border=0, background="#00B2EE", state="disabled")
     remove_button.grid(row=0, column=0, padx=10)
