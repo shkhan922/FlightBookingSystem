@@ -1,12 +1,12 @@
 import tkinter as tk
-from tkinter import PhotoImage, font, Listbox, END
+from tkinter import PhotoImage, font, Listbox, END, messagebox
 from PIL import ImageTk, Image
 import csv
 from trip.add_trip_destination import add_trip_destination
 from trip.remove_destination_trip import remove_destination_trip
 from destinations.view_destinations import view_destinations
-
-
+from trip.add_connecting_flight import add_connecting_flights  # Import the add_connecting_flights function
+from functools import partial
 
 def load_destinations(trip_list):
     with open('trip/destinations.csv', 'r', newline='') as file:
@@ -24,7 +24,7 @@ def view_trip():
     image = Image.open("trip/trip_icon.png")
     icon = ImageTk.PhotoImage(image)
     trip_window.iconphoto(False, icon)
-    
+
     trip_window.geometry('1640x800')
     trip_window.configure(bg='white')
 
@@ -40,7 +40,7 @@ def view_trip():
     canvas.pack()
 
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
-    
+
     welcome_label = tk.Label(trip_window, text="Your Trip", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
@@ -72,11 +72,11 @@ def view_trip():
 def show_trip_menu(admin_name):
     flights = tk.Toplevel()
     flights.title("Book A Trip")
-    
+
     image = Image.open("trip/trip_icon.png")
     icon = ImageTk.PhotoImage(image)
     flights.iconphoto(False, icon)
-    
+
     flights.geometry('1640x600')
     flights.configure(bg='white')
 
@@ -92,7 +92,7 @@ def show_trip_menu(admin_name):
     canvas.pack()
 
     custom_font = font.Font(family="Helvetica", size=18, weight="bold")
-    
+
     welcome_label = tk.Label(flights, text=f"Hi {admin_name}, welcome to the Trip section", bg="white", font=custom_font, fg="#00B2EE")
     welcome_label.pack(pady=20)
 
@@ -108,7 +108,7 @@ def show_trip_menu(admin_name):
     remove_destination_btn = tk.Button(btn_frame, text="Remove Destination", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=remove_destination_trip)
     remove_destination_btn.grid(row=0, column=1, padx=10)
 
-    add_connecting_btn = tk.Button(btn_frame, text="Add Connecting Flights", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD")
+    add_connecting_btn = tk.Button(btn_frame, text="Add Connecting Flights", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=lambda: add_connecting_flights(trip_list))
     add_connecting_btn.grid(row=0, column=2, padx=10)
 
     view_trip_btn = tk.Button(btn_frame, text="View Trip", width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=view_trip)
@@ -119,5 +119,3 @@ def show_trip_menu(admin_name):
 
 if __name__ == "__main__":
     show_trip_menu("Admin Name")
-
-
