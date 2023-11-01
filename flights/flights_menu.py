@@ -48,19 +48,19 @@ def show_flights_menu(admin_name):
     btn_frame = tk.Frame(flights, bg='#00B2EE')
     btn_frame.pack(pady=20, fill="x",side="bottom")
 
-    view_all_btn = tk.Button(btn_frame, text="View All Flights", width=35, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_flights)
+    view_all_btn = tk.Button(btn_frame, text="View All Flights", width=30, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=view_flights)
     view_all_btn.grid(row=0, column=0, padx=10)
 
     view_by_country_btn = tk.Button(btn_frame, text="View Flights by Country", width=45, height=2, fg="white", bg="#00B2EE",activebackground="#009ACD", borderwidth=0, command=view_flights_filtered)
     view_by_country_btn.grid(row=0, column=1, padx=10)
 
-    add_flight_btn = tk.Button(btn_frame, text="Add Flight", width=35, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=add_flight)
+    add_flight_btn = tk.Button(btn_frame, text="Add Flight", width=30, height=2, fg="white", bg="#00B2EE", borderwidth=0, activebackground="#009ACD", command=add_flight)
     add_flight_btn.grid(row=0, column=2, padx=10)
 
-    remove_flight_btn = tk.Button(btn_frame, text="Remove Flight", width=35, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=remove_flight)
+    remove_flight_btn = tk.Button(btn_frame, text="Remove Flight", width=30, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0, command=remove_flight)
     remove_flight_btn.grid(row=0, column=3, padx=10)
 
-    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, width=35, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0)
+    close_btn = tk.Button(btn_frame, text="Close", command=flights.destroy, width=30, height=2, fg="white", bg="#00B2EE", activebackground="#009ACD", borderwidth=0)
     close_btn.grid(row=0, column=4, padx=10)
 
 # Call the show_flights_menu function to display the window
